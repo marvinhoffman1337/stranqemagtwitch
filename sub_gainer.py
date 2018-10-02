@@ -8,9 +8,9 @@ import argparse
 # --------------------------------------------- Start Settings ----------------------------------------------------
 HOST = "irc.twitch.tv"                          # Hostname of the IRC-Server in this case twitch's
 PORT = 6667                                     # Default IRC-Port
-CHAN = "#klub3r"                               # Channelname = #{Nickname}
-NICK = "klub3r"                         # Nickname = Twitch username
-PASS = "oauth:w9lkoa0r2vrfix476w9uds0muny90y"   # www.twitchapps.com/tmi/ will help to retrieve the required authkey
+CHAN = "#0_123456789"                               # Channelname = #{Nickname}
+NICK = "0_123456789"                         # Nickname = Twitch username
+PASS = "oauth:k8f5t0x7a5r0r31nxmofremszmkya4"   # www.twitchapps.com/tmi/ will help to retrieve the required authkey
 # --------------------------------------------- End Settings -------------------------------------------------------
 
 
@@ -62,29 +62,13 @@ def get_message(msg):
 def parse_message(msg):
 	if len(msg) >= 1:
 		msg = msg.split(' ')
-		
-def follow(oauth1, user_id1, channel_id1):
-	headers = {
-	'Accept': 'application/vnd.twitchtv.v5+json',
-	'Client-ID': '6arow4uftfxfu50giby5wx15l0r1x2',
-	'Authorization': 'OAuth '+oauth1,
-	}
-	
-	add = requests.put('https://api.twitch.tv/kraken/users/'+user_id1+'/follows/channels/'+channel_id1, headers=headers)
-	print (add)
-	print ("[ADDED]")
-	wait(1500)
-	remove = requests.delete('https://api.twitch.tv/kraken/users/'+user_id1+'/follows/channels/'+channel_id1, headers=headers)
-	print (remove)
-	print ("[REMOVED]")
-	
 con = socket.socket()
 con.connect((HOST, PORT))
 
 send_pass(PASS)
 send_nick(NICK)
 stream_count = 0
-for number in range(1, 150):
+for number in range(1, 250):
 	response = requests.get('https://api.twitch.tv/kraken/streams?client_id=6arow4uftfxfu50giby5wx15l0r1x2&stream_type=live&offset='+str(number)+"00")
 	parsed_json = json.loads(response.text)
 	for j in parsed_json['streams']:
